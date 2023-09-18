@@ -15,13 +15,14 @@ import java.util.concurrent.Callable;
 public class App implements Callable<String> {
 
     @Parameters(index = "0", description = "path to first file")
-    private File filepath1 = new File("app/src/main/java/hexlet/code/file1.json");
+    private File filepath1 = new File("/src/main/java/hexlet/code/file1.json");
+
     @Parameters(index = "1", description = "path to second file")
     private File filepath2 = new File("app/src/main/java/hexlet/code/file2.json");
 
     @Option(names = {"-f", "--format"}, paramLabel = "format",
-            description = "output format [default: stylish]", defaultValue = "stylish")
-    private String format;
+            description = "output format [default: stylish]")
+    private String format = "stylish";
 
     @Option(names = {"-V", "--version"}, versionHelp = true, description = "Print version information and exit.")
     boolean versionInfoRequested;
