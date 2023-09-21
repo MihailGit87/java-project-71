@@ -12,10 +12,8 @@ import java.util.stream.Collectors;
 public class Differ {
     public static String generate(File file1, File file2) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> parsMap1 = mapper.readValue(file1, new TypeReference<Map<String, Object>>() {
-        });
-        Map<String, Object> parsMap2 = mapper.readValue(file2, new TypeReference<Map<String, Object>>() {
-        });
+        Map<String, Object> parsMap1 = mapper.readValue(file1, new TypeReference<>() {});
+        Map<String, Object> parsMap2 = mapper.readValue(file2, new TypeReference<>() {});
 
         Map<String, Object> commonMap = new HashMap<>();
         commonMap.putAll(parsMap1);

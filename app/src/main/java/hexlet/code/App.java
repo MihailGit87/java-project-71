@@ -15,10 +15,10 @@ import java.util.concurrent.Callable;
 public class App implements Callable<String> {
 
     @Parameters(index = "0", description = "path to first file")
-    private File filepath1 = new File("/src/main/java/hexlet/code/file1.json");
+    private String filepath1;
 
     @Parameters(index = "1", description = "path to second file")
-    private File filepath2 = new File("app/src/main/java/hexlet/code/file2.json");
+    private String filepath2;
 
     @Option(names = {"-f", "--format"}, paramLabel = "format",
             description = "output format [default: stylish]")
@@ -32,14 +32,16 @@ public class App implements Callable<String> {
 
     @Override
     public String call() throws Exception {
+        File file1 = new File(filepath1).getAbsoluteFile();
+        File file2 = new File(filepath2).getAbsoluteFile();
 
-        if (Files.exists(filepath1.toPath())){
-            throw new Exception("File" + filepath1.getName() + "does not exist");
+        if (!Files.exists(file1.toPath())){
+            throw new Exception("File " + file1.getName() + " does not exist");
         }
-        if (Files.exists(filepath2.toPath())){
-            throw new Exception("File" + filepath2.getName() + "does not exist");
+        if (!Files.exists(file2.toPath())){
+            throw new Exception("File " + file2.getName() + " does not exist");
         }
-        return Differ.generate(filepath1, filepath2);
+        return Differ.generate(file1, file2);
     }
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
