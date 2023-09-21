@@ -7,6 +7,8 @@ import picocli.CommandLine.Parameters;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 0.1",
@@ -14,34 +16,27 @@ import java.util.concurrent.Callable;
 
 public class App implements Callable<String> {
 
-    @Parameters(index = "0", description = "path to first file")
+    @Parameters(index = "0", description = "path to first file", paramLabel = "filepath1")
     private String filepath1;
 
-    @Parameters(index = "1", description = "path to second file")
+    @Parameters(index = "1", description = "path to second file", paramLabel = "filepath2")
     private String filepath2;
 
-    @Option(names = {"-f", "--format"}, paramLabel = "format",
-            description = "output format [default: stylish]")
-    private String format = "stylish";
-
-    @Option(names = {"-V", "--version"}, versionHelp = true, description = "Print version information and exit.")
-    boolean versionInfoRequested;
-
-    @Option(names = {"-h", "--help"}, usageHelp = true, description = "Show this help message and exit.")
-    boolean usageHelpRequested;
+    @Option(names = {"-f", "--format"}, defaultValue = "", description = "output format [default: stylish]")
+    private String format;
 
     @Override
     public String call() throws Exception {
-        File file1 = new File(filepath1).getAbsoluteFile();
-        File file2 = new File(filepath2).getAbsoluteFile();
+        Path path1 = Paths.get(filepath1).toAbsolutePath().normalize();
+        Path path2 = Paths.get(filepath2).toAbsolutePath().normalize();
 
-        if (!Files.exists(file1.toPath())){
-            throw new Exception("File " + file1.getName() + " does not exist");
+        if (!Files.exists(path1)){
+            throw new Exception("File " + path1 + " does not exist");
         }
-        if (!Files.exists(file2.toPath())){
-            throw new Exception("File " + file2.getName() + " does not exist");
+        if (!Files.exists(path2)){
+            throw new Exception("File " + path2 + " does not exist");
         }
-        return Differ.generate(file1, file2);
+        return Differ.generate(path1, path2);
     }
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
