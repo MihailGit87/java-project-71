@@ -5,7 +5,6 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,10 +29,10 @@ public class App implements Callable<String> {
         Path path1 = Paths.get(filepath1).toAbsolutePath().normalize();
         Path path2 = Paths.get(filepath2).toAbsolutePath().normalize();
 
-        if (!Files.exists(path1)){
+        if (!Files.exists(path1)) {
             throw new Exception("File " + path1 + " does not exist");
         }
-        if (!Files.exists(path2)){
+        if (!Files.exists(path2)) {
             throw new Exception("File " + path2 + " does not exist");
         }
         return Differ.generate(path1, path2);
