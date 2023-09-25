@@ -22,9 +22,7 @@ public class Differ {
 
         String  result;
         result = commonMap
-                .keySet()
-                .stream()
-                .sorted()
+                .keySet().stream().sorted()
                 .map(key -> {
                     String out = "";
                     if (parsMap1.containsKey(key) && !parsMap2.containsKey(key)) {
