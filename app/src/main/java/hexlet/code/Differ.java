@@ -15,14 +15,11 @@ public class Differ {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> parsMap1 = mapper.readValue(Files.readString(filepath1), new TypeReference<>() { });
         Map<String, Object> parsMap2 = mapper.readValue(Files.readString(filepath2), new TypeReference<>() { });
-
         Map<String, Object> commonMap = new HashMap<>();
         commonMap.putAll(parsMap1);
         commonMap.putAll(parsMap2);
-
         String  result;
-        result = commonMap
-                .keySet().stream().sorted()
+        result = commonMap.keySet().stream().sorted()
                 .map(key -> {
                     String out = "";
                     if (parsMap1.containsKey(key) && !parsMap2.containsKey(key)) {
