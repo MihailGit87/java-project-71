@@ -1,7 +1,16 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'jacoco'
+    id "io.freefair.lombok" version "8.3"
+    id "com.github.ben-manes.versions" version "0.48.0"
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+    id "se.patrikerdes.use-latest-versions" version "0.2.18"
+    id 'com.adarshr.test-logger' version '3.2.0'
 }
 
 application {
@@ -23,8 +32,19 @@ dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.15.2'
 }
 
+testlogger {
+    showStandardStreams true
+}
+
 test {
     useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.outputLocation = layout.buildDirectory.dir('reports/jacoco/test/')
+    }
 }
 
 compileJava {
