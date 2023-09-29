@@ -1,10 +1,13 @@
 //import hexlet.code.Differ;
+//import hexlet.code.Parser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 //import java.io.IOException;
+
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
     File file1;
@@ -47,5 +50,7 @@ public class DifferTest {
 //                + "  + setting3: none\n"
 //                + "}";
 //        String actual = Differ.generate(file1.toPath(), file2.toPath());
+////        assertEquals(expected, Parser.parseContent(yml, "yml"));
+//        assertEquals(expected, actual);
 //    }
 }
