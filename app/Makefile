@@ -1,4 +1,3 @@
-run-dist:
 .DEFAULT_GOAL := build-run
 
 setup:
@@ -14,7 +13,7 @@ install:
 	./gradlew clean install
 
 run-dist:
-	./build/install/app/bin/app
+	@./build/install/app/bin/app -h
 
 run:
 	./gradlew run
