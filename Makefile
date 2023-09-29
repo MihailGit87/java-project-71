@@ -1,34 +1,34 @@
 .DEFAULT_GOAL := build-run
 
 setup:
-	gradle wrapper --gradle-version 8.2
+	make -C app setup
 
 clean:
-	./gradlew clean
+	make -C app clean
 
 build:
-	./gradlew clean build
+	make -C app build
 
 install:
-	./gradlew clean install
+	make -C app install
 
 run-dist:
-	./build/install/java-package/bin/java-package
+	make -C app run-dist
 
 run:
-	./gradlew run
+	make -C app run
 
 test:
-	./gradlew test
+	make -C app test
 
 report:
-	./gradlew jacocoTestReport
+	make -C app report
 
 lint:
-	./gradlew checkstyleMain
+	make -C app lint
 
 check-deps:
-	./gradlew dependencyUpdates -Drevision=release
+	make -C app check-deps
 
 
 build-run: build run
