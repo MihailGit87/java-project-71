@@ -7,10 +7,9 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.Objects;
 
 public class Parser {
-    public static Map<String, Objects> parseContent(String content, String dataFormat) throws IOException {
+    public static Map<String, Object> parseContent(String content, String dataFormat) throws IOException {
         ObjectMapper objectMapper;
 
         if (dataFormat.equals("json")) {
