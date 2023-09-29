@@ -38,12 +38,12 @@ testlogger {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
     reports {
         xml.required = true
-        html.outputLocation = layout.buildDirectory.dir('reports/jacoco/test/')
     }
 }
 
