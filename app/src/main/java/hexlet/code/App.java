@@ -27,7 +27,7 @@ public class App implements Callable<Integer> {
         try {
             result = Differ.generate(filepath1, filepath2, format);
         } catch (Exception e) {
-            System.out.printf("Something went wrong. Problem in: %$", e.getMessage());
+            System.out.printf("Something went wrong. Problem in: %s", e.getMessage());
             return 1;
         }
         System.out.println(result);

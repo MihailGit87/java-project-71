@@ -6,16 +6,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Plain implements StyleFormatter {
-    private final String patternAdded = "Property '%$' was added with value: %$";
-    private final String patternRemoved = "Property '%$' was removed";
-    private final String patternChanged = "Property '%$' was updated";
+    private final String patternAdded = "Property '%s' was added with value: %s";
+    private final String patternRemoved = "Property '%s' was removed";
+    private final String patternChanged = "Property '%s' was updated";
     private final String patternUnchanged = "";
     private String formatValue(Object value) {
         if (value.equals("null") || value.getClass().equals(Integer.class)
                 || value.getClass().equals(Boolean.class)) {
             return value.toString();
         } else if (value.getClass().equals(String.class)) {
-            return "'%$'".formatted(value);
+            return "'%s'".formatted(value);
         } else {
             return "[complex value]";
         }
