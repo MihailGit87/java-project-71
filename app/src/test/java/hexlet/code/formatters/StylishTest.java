@@ -3,7 +3,6 @@ package hexlet.code.formatters;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-//import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,18 +21,18 @@ class StylishTest {
                         "newValue", "value", "oldValue", str));
     }
 
-//    @Test
-//    void testFormatText() throws IOException {
-//        String expected = "{\n"
-//                + "  + key: 1\n"
-//                + "  - key1: value\n"
-//                + "    key2: value\n"
-//                + "  - key3: [a, b]\n"
-//                + "  + key3: value\n"
-//                + "}";
-//
-//        assertEquals(expected, new Stylish().formatText(list));
-//    }
+    @Test
+    void testFormatText() {
+        String expected = "{\n"
+                + "  + key: 1\n"
+                + "  - key1: value\n"
+                + "    key2: value\n"
+                + "  - key3: [a, b]\n"
+                + "  + key3: value\n"
+                + "}";
+
+        assertEquals(expected, new Stylish().formatText(list));
+    }
 
     @Test
     void testBadDiffStatus() {

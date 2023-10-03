@@ -41,8 +41,8 @@ class AppTest {
 
     @Test
     void mainJson() {
-//        App.main(file1json, file2json);
-//        assertEquals(expectedStylish, output.toString(StandardCharsets.UTF_8).trim());
+        App.main(file1json, file2json);
+        assertEquals(expectedStylish, output.toString(StandardCharsets.UTF_8).trim());
     }
 
     @Test

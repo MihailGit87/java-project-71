@@ -1,21 +1,17 @@
 package hexlet.code.formatters;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Plain implements StyleFormatter {
+public final class Plain implements StyleFormatter {
     private final String patternAdded = "Property '%s' was added with value: %s";
     private final String patternRemoved = "Property '%s' was removed";
-    private final String patternChanged = "Property '%s' was updated";
+    private final String patternChanged = "Property '%s' was updated. From %s to %s";
     private final String patternUnchanged = "";
 
     private String formatValue(Object value) {
-        if (value == null) {
-            return "null";
-        }
-        if (value.getClass().equals(Integer.class) || value.getClass().equals(Boolean.class)) {
+        if (value.equals("null") || value.getClass().equals(Integer.class) || value.getClass().equals(Boolean.class)) {
             return value.toString();
         } else if (value.getClass().equals(String.class)) {
             return "'%s'".formatted(value);
@@ -25,13 +21,14 @@ public class Plain implements StyleFormatter {
     }
 
     @Override
-    public String formatText(List<Map<String, Object>> list) throws IOException {
+    public String formatText(List<Map<String, Object>> list) {
         return list.stream()
                 .map(line -> {
                     Object status = line.get("status");
                     Object field = line.get("field");
+
                     if (status.equals("added")) {
-                        return patternAdded.formatted(field, formatValue(line.get("oldValue")));
+                        return patternAdded.formatted(field, formatValue(line.get("newValue")));
                     } else if (status.equals("removed")) {
                         return patternRemoved.formatted(field);
                     } else if (status.equals("changed")) {

@@ -17,8 +17,9 @@ public class Parser {
         } else if (dataFormat.matches("yml|yaml")) {
             objectMapper = new ObjectMapper(new YAMLFactory());
         } else {
-            throw new IOException("Unsupported data format");
+            throw new IOException("Unsupported dataFormat");
         }
+
         return objectMapper.readValue(content, new TypeReference<>() {
         });
     }

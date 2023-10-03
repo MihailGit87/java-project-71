@@ -3,7 +3,6 @@ package hexlet.code.formatters;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,10 +21,10 @@ class PlainTest {
     }
 
     @Test
-    void testFormatText() throws IOException {
-        String expected = "Property 'key' was added with value: null\n"
+    void testFormatText() {
+        String expected = "Property 'key' was added with value: 1\n"
                 + "Property 'key1' was removed\n"
-                + "Property 'key3' was updated";
+                + "Property 'key3' was updated. From [complex value] to 'value'";
 
         assertEquals(expected, new Plain().formatText(list));
     }

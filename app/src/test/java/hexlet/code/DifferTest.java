@@ -40,17 +40,17 @@ public class DifferTest {
         file1FullPath = Path.of(file1json).toAbsolutePath().toString();
     }
 
-//    @Test
-//    void testGenerateStylish() throws IOException {
-//        assertEquals(Differ.generate(file1json, file2json), expectedStylish);
-//        assertEquals(Differ.generate(file1FullPath, file2json, formatStylish), expectedStylish);
-//        assertEquals(Differ.generate(file1yaml, file2yaml, formatStylish), expectedStylish);
-//    }
+    @Test
+    void testGenerateStylish() throws IOException {
+        assertEquals(Differ.generate(file1json, file2json), expectedStylish);
+        assertEquals(Differ.generate(file1FullPath, file2json, formatStylish), expectedStylish);
+        assertEquals(Differ.generate(file1yaml, file2yaml, formatStylish), expectedStylish);
+    }
 
-//    @Test
-//    void testGeneratePlain() throws IOException {
-//        assertEquals(expectedPlain, Differ.generate(file1yaml, file2yaml, formatPlain));
-//    }
+    @Test
+    void testGeneratePlain() throws IOException {
+        assertEquals(expectedPlain, Differ.generate(file1yaml, file2yaml, formatPlain));
+    }
 
     @Test
     void testGenerateJson() throws IOException {
@@ -70,10 +70,10 @@ public class DifferTest {
         });
     }
 
-//    @Test
-//    void testGenerateWithDifferentExtension() throws IOException {
-//        assertEquals(expectedStylish, Differ.generate(file1json, file2yaml, formatStylish));
-//    }
+    @Test
+    void testGenerateWithDifferentExtension() throws IOException {
+        assertEquals(expectedStylish, Differ.generate(file1json, file2yaml, formatStylish));
+    }
 
     @Test
     void testDiffer() {
