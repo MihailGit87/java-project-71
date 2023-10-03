@@ -34,8 +34,8 @@ public class DifferTest {
         file2json = PATH_TO_FIXTURES + "fixtures/file2.json";
         file1yaml = PATH_TO_FIXTURES + "fixtures/file1.yml";
         file2yaml = PATH_TO_FIXTURES + "fixtures/file2.yaml";
-        file1txt =  PATH_TO_FIXTURES + "fixtures/file1.txt";
-        file2txt =  PATH_TO_FIXTURES + "fixtures/file2.txt";
+        file1txt = PATH_TO_FIXTURES + "fixtures/file1.txt";
+        file2txt = PATH_TO_FIXTURES + "fixtures/file2.txt";
         file1FullPath = Path.of(file1json).toAbsolutePath().toString();
     }
 

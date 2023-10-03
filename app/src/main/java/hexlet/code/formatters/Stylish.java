@@ -10,9 +10,11 @@ public class Stylish implements StyleFormatter {
     private final String patternRemoved = " - %s: %s";
     private final String patternChanged = " - %s: %s\n + %s: %s";
     private final String patternUnchanged = "    %s: %s";
+
     private String formatValue(Object value) {
         return value.toString();
     }
+
     @Override
     public String formatText(List<Map<String, Object>> list) throws IOException {
         return list.stream()

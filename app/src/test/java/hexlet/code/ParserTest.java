@@ -22,6 +22,7 @@ public class ParserTest {
                 """;
         yml = "key: value";
     }
+
     @Test
     void testParserContent() throws IOException {
         Map<String, Object> expected = Map.of("key", "value");

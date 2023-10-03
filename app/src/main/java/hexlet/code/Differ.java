@@ -5,7 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.commons.io.FilenameUtils;
+
 public class Differ {
     public static String generate(String pathToFirstFile, String pathToSecondFile, String format) throws IOException {
         Map<String, Object> firstData = getData(pathToFirstFile);

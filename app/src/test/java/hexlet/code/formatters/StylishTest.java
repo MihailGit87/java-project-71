@@ -21,6 +21,7 @@ class StylishTest {
                 Map.of("status", "changed", "field", "key3",
                         "newValue", "value", "oldValue", str));
     }
+
     @Test
     void testFormatText() throws IOException {
         String expected = "{\n"
