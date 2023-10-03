@@ -1,4 +1,4 @@
-package hexlet.code.Formatters;
+package hexlet.code.formatters;
 
 import java.io.IOException;
 import java.util.List;
