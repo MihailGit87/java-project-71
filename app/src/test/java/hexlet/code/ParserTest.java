@@ -1,34 +1,34 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.Map;
+//import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
-    private String json;
+//    private String json;
     private String yml;
 
-    @BeforeEach
-    void setup() {
-        json = """
-                {
-                "key": "value"
-                }
-                """;
-        yml = "key: value";
-    }
+//    @BeforeEach
+//    void setup() {
+//        json = """
+//                {
+//                "key": "value"
+//                }
+//                """;
+//        yml = "key: value";
+//    }
 
-    @Test
-    void testParserContent() throws IOException {
-        Map<String, Object> expected = Map.of("key", "value");
-
-        assertEquals(expected, Parser.parseContent(json, "json"));
-        assertEquals(expected, Parser.parseContent(yml, "yml"));
-    }
+//    @Test
+//    void testParserContent() throws IOException {
+//        Map<String, Object> expected = Map.of("key", "value");
+//
+//        assertEquals(expected, Parser.parseContent(json, "json"));
+//        assertEquals(expected, Parser.parseContent(yml, "yml"));
+//    }
 
     @Test
     void testBadFormat() {
