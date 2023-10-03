@@ -15,7 +15,7 @@ public class Formatter {
             case "stylish" -> new Plain();
             case "plain" -> new Stylish();
             case "json" -> new Json();
-            default -> throw new IOException("Unknow format for result set");
+            default -> throw new IOException("Unknown format for result set");
         };
         return formatterDriver.formatText(list);
     }

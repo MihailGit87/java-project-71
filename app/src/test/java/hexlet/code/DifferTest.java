@@ -1,11 +1,9 @@
+package hexlet.code;
+
 import hexlet.code.Differ;
-import hexlet.code.Parser;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,15 +27,15 @@ public class DifferTest {
 
     @BeforeAll
     static void setBefore() throws IOException {
-        expectedStylish = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedStylish.txt"));
-        expectedPlain = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedPlain.txt"));
-        expectedJson = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedJson.txt"));
-        file1json = PATH_TO_FIXTURES + "file1.json";
-        file2json = PATH_TO_FIXTURES + "file2.json";
-        file1yaml = PATH_TO_FIXTURES + "file1.yml";
-        file2yaml = PATH_TO_FIXTURES + "file2.yaml";
-        file1txt =  PATH_TO_FIXTURES + "file1.txt";
-        file2txt =  PATH_TO_FIXTURES + "file2.txt";
+        expectedStylish = Files.readString(Path.of(PATH_TO_FIXTURES + "fixtures/expectedStylish.txt"));
+        expectedPlain = Files.readString(Path.of(PATH_TO_FIXTURES + "fixtures/expectedPlain.txt"));
+        expectedJson = Files.readString(Path.of(PATH_TO_FIXTURES + "fixtures/expectedJson.txt"));
+        file1json = PATH_TO_FIXTURES + "fixtures/file1.json";
+        file2json = PATH_TO_FIXTURES + "fixtures/file2.json";
+        file1yaml = PATH_TO_FIXTURES + "fixtures/file1.yml";
+        file2yaml = PATH_TO_FIXTURES + "fixtures/file2.yaml";
+        file1txt =  PATH_TO_FIXTURES + "fixtures/file1.txt";
+        file2txt =  PATH_TO_FIXTURES + "fixtures/file2.txt";
         file1FullPath = Path.of(file1json).toAbsolutePath().toString();
     }
 

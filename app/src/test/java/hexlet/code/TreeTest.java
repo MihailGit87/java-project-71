@@ -1,3 +1,5 @@
+package hexlet.code;
+
 import hexlet.code.Tree;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

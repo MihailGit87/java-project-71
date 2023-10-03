@@ -33,8 +33,8 @@ public class App implements Callable<Integer> {
         System.out.println(result);
         return 0;
     }
-    public static void main(String[] args) {
-        int exitCode = new CommandLine(new App()).execute(args);
-        System.exit(exitCode);
+
+    public static void main(String... args) {
+        new CommandLine(new App()).execute(args);
     }
 }

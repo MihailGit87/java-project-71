@@ -6,10 +6,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Stylish implements StyleFormatter {
-    private final String patternAdded = " + %$: %$";
-    private final String patternRemoved = " - %$: %$";
-    private final String patternChanged = " - %$: %$\n + %$: %$";
-    private final String patternUnchanged = "    %$: %$";
+    private final String patternAdded = " + %s: %s";
+    private final String patternRemoved = " - %s: %s";
+    private final String patternChanged = " - %s: %s\n + %s: %s";
+    private final String patternUnchanged = "    %s: %s";
     private String formatValue(Object value) {
         return value.toString();
     }
