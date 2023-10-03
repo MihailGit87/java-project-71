@@ -1,6 +1,6 @@
 package hexlet.code;
 
-//import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-//import java.nio.charset.StandardCharsets;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Files;
 
@@ -47,8 +47,8 @@ class AppTest {
 
     @Test
     void mainWithWrongJsonFile1() {
-//        App.main(wrongPath, file2json);
-//        assertEquals(expectedError.formatted(wrongPath), output.toString(StandardCharsets.UTF_8).trim());
+        App.main(wrongPath, file2json);
+        assertEquals(expectedError.formatted(wrongPath), output.toString(StandardCharsets.UTF_8).trim());
     }
 
     @AfterEach
