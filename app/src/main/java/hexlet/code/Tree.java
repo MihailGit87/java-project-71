@@ -13,14 +13,14 @@ public class Tree {
                 .sorted(Comparator.comparing(String::format))
                 .map(key -> {
                     Object value1 = Optional.ofNullable(firstData.get(key)).orElse("null");
-                    Object value2 = Optional.ofNullable(firstData.get(key)).orElse("null");
+                    Object value2 = Optional.ofNullable(secondData.get(key)).orElse("null");
 
                     if (firstData.containsKey(key) && secondData.containsKey(key)) {
                         if (value1.equals(value2)) {
                             return Map.of("field", key, "status", "unchanged", "value", value1);
                         } else {
-                            return Map.of("field", key, "status", "changed",
-                                    "oldValue", value1, "newValue", value2);
+                            return Map.of("field", key, "status", "changed", "oldValue", value1,
+                                    "newValue", value2);
                         }
                     } else if (secondData.containsKey(key)) {
                         return Map.of("field", key, "status", "added", "newValue", value2);

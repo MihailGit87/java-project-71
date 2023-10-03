@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.commons.io.FilenameUtils;
 
 public class Differ {
+
     public static String generate(String pathToFirstFile, String pathToSecondFile, String format) throws IOException {
         Map<String, Object> firstData = getData(pathToFirstFile);
         Map<String, Object> secondData = getData(pathToSecondFile);
@@ -17,13 +18,13 @@ public class Differ {
         return Formatter.formatText(list, format);
     }
 
+    public static String generate(String pathToFirstFile, String pathToSecondFile) throws IOException {
+        return generate(pathToFirstFile, pathToSecondFile, "stylish");
+    }
+
     private static Map<String, Object> getData(String filePath) throws IOException {
         String content = Files.readString(Path.of(filePath));
         String extension = FilenameUtils.getExtension(filePath);
         return Parser.parseContent(content, extension);
-    }
-
-    public static String generate(String pathToFirstFile, String pathToSecondFile) throws IOException {
-        return generate(pathToFirstFile, pathToSecondFile, "stylish");
     }
 }

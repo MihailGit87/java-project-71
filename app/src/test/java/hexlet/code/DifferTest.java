@@ -18,58 +18,61 @@ public class DifferTest {
     private static String file2yaml;
     private static String file1txt;
     private static String file2txt;
+    private final String formatStylish = "stylish";
+    private final String formatPlain = "plain";
+    private final String formatJson = "json";
     private static String expectedStylish;
     private static String expectedPlain;
     private static String expectedJson;
-    private static final String PATH_TO_FIXTURES = "src/test/resources/";
+    private static final String PATH_TO_FIXTURES = "src/test/resources/fixtures/";
 
     @BeforeAll
     static void setBefore() throws IOException {
-        expectedStylish = Files.readString(Path.of(PATH_TO_FIXTURES + "fixtures/expectedStylish.txt"));
-        expectedPlain = Files.readString(Path.of(PATH_TO_FIXTURES + "fixtures/expectedPlain.txt"));
-        expectedJson = Files.readString(Path.of(PATH_TO_FIXTURES + "fixtures/expectedJson.txt"));
-        file1json = PATH_TO_FIXTURES + "fixtures/file1.json";
-        file2json = PATH_TO_FIXTURES + "fixtures/file2.json";
-        file1yaml = PATH_TO_FIXTURES + "fixtures/file1.yml";
-        file2yaml = PATH_TO_FIXTURES + "fixtures/file2.yaml";
-        file1txt = PATH_TO_FIXTURES + "fixtures/file1.txt";
-        file2txt = PATH_TO_FIXTURES + "fixtures/file2.txt";
+        expectedStylish = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedStylish.txt"));
+        expectedPlain = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedPlain.txt"));
+        expectedJson = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedJson.txt"));
+        file1json = PATH_TO_FIXTURES + "file1.json";
+        file2json = PATH_TO_FIXTURES + "file2.json";
+        file1yaml = PATH_TO_FIXTURES + "file1.yml";
+        file2yaml = PATH_TO_FIXTURES + "file2.yaml";
+        file1txt =  PATH_TO_FIXTURES + "file1.txt";
+        file2txt =  PATH_TO_FIXTURES + "file2.txt";
         file1FullPath = Path.of(file1json).toAbsolutePath().toString();
     }
 
 //    @Test
 //    void testGenerateStylish() throws IOException {
 //        assertEquals(Differ.generate(file1json, file2json), expectedStylish);
-//        assertEquals(Differ.generate(file1FullPath, file2json, "stylish"), expectedStylish);
-//        assertEquals(Differ.generate(file1yaml, file2yaml, "stylish"), expectedStylish);
+//        assertEquals(Differ.generate(file1FullPath, file2json, formatStylish), expectedStylish);
+//        assertEquals(Differ.generate(file1yaml, file2yaml, formatStylish), expectedStylish);
 //    }
-//
+
 //    @Test
 //    void testGeneratePlain() throws IOException {
-//        assertEquals(expectedPlain, Differ.generate(file1yaml, file2yaml, "plain"));
+//        assertEquals(expectedPlain, Differ.generate(file1yaml, file2yaml, formatPlain));
 //    }
-//
-//    @Test
-//    void testGenerateJson() throws IOException {
-//        assertEquals(expectedJson, Differ.generate(file1yaml, file2yaml, "json"));
-//    }
+
+    @Test
+    void testGenerateJson() throws IOException {
+        assertEquals(expectedJson, Differ.generate(file1yaml, file2yaml, formatJson));
+    }
 
     @Test
     void testGenerateWithUnknownExtension() {
         assertThrowsExactly(IOException.class, () -> {
-            Differ.generate(file1txt, file2txt, "stylish");
+            Differ.generate(file1txt, file2txt, formatStylish);
         });
         assertThrowsExactly(IOException.class, () -> {
-            Differ.generate(file1txt, file2json, "stylish");
+            Differ.generate(file1txt, file2json, formatStylish);
         });
         assertThrowsExactly(IOException.class, () -> {
-            Differ.generate(file1json, file2txt, "stylish");
+            Differ.generate(file1json, file2txt, formatStylish);
         });
     }
 
 //    @Test
 //    void testGenerateWithDifferentExtension() throws IOException {
-//        assertEquals(expectedStylish, Differ.generate(file1json, file2yaml, "stylish"));
+//        assertEquals(expectedStylish, Differ.generate(file1json, file2yaml, formatStylish));
 //    }
 
     @Test
