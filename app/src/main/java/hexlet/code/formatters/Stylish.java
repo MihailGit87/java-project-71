@@ -11,9 +11,9 @@ public final class Stylish implements StyleFormatter {
     private final String patternChanged = "  - %s: %s\n  + %s: %s";
     private final String patternUnchanged = "    %s: %s";
 
-    private String formatValue(Object value) {
-        return value.toString();
-    }
+//    private String formatValue(Object value) {
+//        return value.toString();
+//    }
     @Override
     public String formatText(List<Map<String, Object>> list) {
         return list.stream()
@@ -22,14 +22,14 @@ public final class Stylish implements StyleFormatter {
                     Object field = line.get("field");
 
                     if (status.equals("added")) {
-                        return patternAdded.formatted(field,     formatValue(line.get("newValue")));
+                        return patternAdded.formatted(field, line.get("newValue"));
                     } else if (status.equals("removed")) {
-                        return patternRemoved.formatted(field,   formatValue(line.get("oldValue")));
+                        return patternRemoved.formatted(field, line.get("oldValue"));
                     } else if (status.equals("changed")) {
-                        return patternChanged.formatted(field,   formatValue(line.get("oldValue")),
-                                field, formatValue(line.get("newValue")));
+                        return patternChanged.formatted(field, line.get("oldValue"),
+                                field, line.get("newValue"));
                     } else if (status.equals("unchanged")) {
-                        return patternUnchanged.formatted(field, formatValue(line.get("value")));
+                        return patternUnchanged.formatted(field, line.get("value"));
                     } else {
                         throw new RuntimeException("Unknown status for diff");
                     }
