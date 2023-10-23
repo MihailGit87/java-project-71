@@ -24,8 +24,8 @@ public final class Stylish implements StyleFormatter {
                     } else if (status.equals("removed")) {
                         return patternRemoved.formatted(field, line.get("value2"));
                     } else if (status.equals("changed")) {
-                        return patternChanged.formatted(field, line.get("value2"),
-                                field, line.get("value1"));
+                        return patternChanged.formatted(field, line.get("value1"),
+                                field, line.get("value2"));
                     } else if (status.equals("unchanged")) {
                         return patternUnchanged.formatted(field, line.get("value"));
                     } else {

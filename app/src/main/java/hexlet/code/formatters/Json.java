@@ -12,10 +12,6 @@ public final class Json implements StyleFormatter {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setConfig(objectMapper.getSerializationConfig()
                 .with(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS));
-        try {
-            return objectMapper.writeValueAsString(list);
-        } catch (Exception e) {
-            throw new IOException("Problem on format processing");
-        }
+        return objectMapper.writeValueAsString(list);
     }
 }
