@@ -28,8 +28,8 @@ class StylishTest {
                   + key: 1
                   - key1: value
                     key2: value
-                  - key3: [a, b]
-                  + key3: value
+                  - key3: value
+                  + key3: [a, b]
                 }""";
 
         assertEquals(expected, new Stylish().formatText(list));
