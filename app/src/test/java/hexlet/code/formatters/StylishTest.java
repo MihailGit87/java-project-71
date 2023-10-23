@@ -14,22 +14,23 @@ class StylishTest {
     @BeforeEach
     void setUp() {
         List<String> str = List.of("a", "b");
-        list = List.of(Map.of("status", "added", "field", "key", "newValue", 1),
-                Map.of("status", "removed", "field", "key1", "oldValue", "value"),
+        list = List.of(Map.of("status", "added", "field", "key", "value1", 1),
+                Map.of("status", "removed", "field", "key1", "value2", "value"),
                 Map.of("status", "unchanged", "field", "key2", "value", "value"),
                 Map.of("status", "changed", "field", "key3",
-                        "newValue", "value", "oldValue", str));
+                        "value1", "value", "value2", str));
     }
 
     @Test
     void testFormatText() {
-        String expected = "{\n"
-                + "  + key: 1\n"
-                + "  - key1: value\n"
-                + "    key2: value\n"
-                + "  - key3: [a, b]\n"
-                + "  + key3: value\n"
-                + "}";
+        String expected = """
+                {
+                  + key: 1
+                  - key1: value
+                    key2: value
+                  - key3: [a, b]
+                  + key3: value
+                }""";
 
         assertEquals(expected, new Stylish().formatText(list));
     }
@@ -37,7 +38,7 @@ class StylishTest {
     @Test
     void testBadDiffStatus() {
         try {
-            list = List.of(Map.of("status", "added1", "field", "key", "newValue", 1));
+            list = List.of(Map.of("status", "added1", "field", "key", "value1", 1));
             new Stylish().formatText(list);
         } catch (Exception e) {
             assertEquals(RuntimeException.class, e.getClass());

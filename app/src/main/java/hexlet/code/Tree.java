@@ -19,13 +19,13 @@ public class Tree {
                         if (value1.equals(value2)) {
                             return Map.of("field", key, "status", "unchanged", "value", value1);
                         } else {
-                            return Map.of("field", key, "status", "changed", "oldValue", value1,
-                                    "newValue", value2);
+                            return Map.of("field", key, "status", "changed", "value1", value1,
+                                    "value2", value2);
                         }
                     } else if (secondData.containsKey(key)) {
-                        return Map.of("field", key, "status", "added", "newValue", value2);
+                        return Map.of("field", key, "status", "added", "value2", value2);
                     } else {
-                        return Map.of("field", key, "status", "removed", "oldValue", value1);
+                        return Map.of("field", key, "status", "removed", "value1", value1);
                     }
                 }).toList();
     }

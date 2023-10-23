@@ -15,19 +15,19 @@ class JsonTest {
 
     @BeforeEach
     void setUp() {
-        list = List.of(Map.of("status", "added", "field", "key", "newValue", 1),
-                Map.of("status", "removed", "field", "key1", "oldValue", "value"),
+        list = List.of(Map.of("status", "added", "field", "key", "value1", 1),
+                Map.of("status", "removed", "field", "key1", "value2", "value"),
                 Map.of("status", "unchanged", "field", "key2", "value", "value"),
                 Map.of("status", "changed", "field", "key3",
-                        "newValue", "value", "oldValue", new String[]{"a", "b"}));
+                        "value1", "value", "value2", new String[]{"a", "b"}));
     }
 
     @Test
     void formatText() throws IOException {
-        String expected = "[{\"field\":\"key\",\"newValue\":1,\"status\":\"added\"},{\"field\":\"key1\","
-                + "\"oldValue\":\"value\",\"status\":\"removed\"},{\"field\":\"key2\","
-                + "\"status\":\"unchanged\",\"value\":\"value\"},{\"field\":\"key3\","
-                + "\"newValue\":\"value\",\"oldValue\":[\"a\",\"b\"],\"status\":\"changed\"}]";
+        String expected = "[{\"field\":\"key\",\"status\":\"added\",\"value1\":1},"
+                + "{\"field\":\"key1\",\"status\":\"removed\",\"value2\":\"value\"},"
+                + "{\"field\":\"key2\",\"status\":\"unchanged\",\"value\":\"value\"},"
+                + "{\"field\":\"key3\",\"status\":\"changed\",\"value1\":\"value\",\"value2\":[\"a\",\"b\"]}]";
         assertEquals(expected, new Json().formatText(list));
     }
 

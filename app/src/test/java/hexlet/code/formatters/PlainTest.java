@@ -13,25 +13,26 @@ class PlainTest {
 
     @BeforeEach
     void setUp() {
-        list = List.of(Map.of("status", "added", "field", "key", "newValue", 1),
-                Map.of("status", "removed", "field", "key1", "oldValue", "value"),
+        list = List.of(Map.of("status", "added", "field", "key", "value1", 1),
+                Map.of("status", "removed", "field", "key1", "value2", "value"),
                 Map.of("status", "unchanged", "field", "key2", "value", "value"),
                 Map.of("status", "changed", "field", "key3",
-                        "newValue", "value", "oldValue", new String[]{"a", "b"}));
+                        "value1", "value", "value2", new String[]{"a", "b"}));
     }
 
     @Test
     void testFormatText() {
-        String expected = "Property 'key' was added with value: 1\n"
-                + "Property 'key1' was removed\n"
-                + "Property 'key3' was updated. From [complex value] to 'value'";
+        String expected = """
+                Property 'key' was added with value: 1
+                Property 'key1' was removed
+                Property 'key3' was updated. From [complex value] to 'value'""";
 
         assertEquals(expected, new Plain().formatText(list));
     }
 
     @Test
     void testUnknownFormatText() {
-        list = List.of(Map.of("status", "added1", "field", "key", "newValue", 1));
+        list = List.of(Map.of("status", "added1", "field", "key", "value1", 1));
         try {
             new Plain().formatText(list);
         } catch (Exception e) {

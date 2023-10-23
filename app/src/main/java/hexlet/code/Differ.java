@@ -8,6 +8,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Differ {
 
@@ -24,8 +25,8 @@ public class Differ {
     }
 
     private static Map<String, Object> getData(String filePath) throws IOException {
-        String content = Files.readString(Path.of(filePath));
-        String extension = FilenameUtils.getExtension(filePath);
+        String content = Optional.ofNullable(Files.readString(Path.of(filePath))).orElse("null");
+        String extension = Optional.ofNullable(FilenameUtils.getExtension(filePath)).orElse("null");
         return Parser.parseContent(content, extension);
     }
 }
