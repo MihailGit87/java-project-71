@@ -2,7 +2,6 @@ package hexlet.code.formatters;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public final class Plain implements StyleFormatter {
