@@ -29,12 +29,12 @@ public final class Plain implements StyleFormatter {
                     Object field = Optional.ofNullable(line.get("field")).orElse("null");
 
                     if (status.equals("added")) {
-                        return patternAdded.formatted(field, formatValue(line.get("value1")));
+                        return patternAdded.formatted(field, formatValue(line.get("value2")));
                     } else if (status.equals("removed")) {
                         return patternRemoved.formatted(field);
                     } else if (status.equals("changed")) {
-                        return patternChanged.formatted(field, formatValue(line.get("value2")),
-                                formatValue(line.get("value1")));
+                        return patternChanged.formatted(field, formatValue(line.get("value1")),
+                                formatValue(line.get("value2")));
                     } else if (status.equals("unchanged")) {
                         return patternUnchanged;
                     } else {

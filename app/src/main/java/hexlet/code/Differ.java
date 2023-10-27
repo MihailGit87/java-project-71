@@ -3,12 +3,9 @@ package hexlet.code;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Files;
-
 import org.apache.commons.io.FilenameUtils;
-
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class Differ {
 
@@ -25,8 +22,8 @@ public class Differ {
     }
 
     private static Map<String, Object> getData(String filePath) throws IOException {
-        String content = Optional.ofNullable(Files.readString(Path.of(filePath))).orElse("null");
-        String extension = Optional.ofNullable(FilenameUtils.getExtension(filePath)).orElse("null");
+        String content = Files.readString(Path.of(filePath));
+        String extension = FilenameUtils.getExtension(filePath);
         return Parser.parseContent(content, extension);
     }
 }
