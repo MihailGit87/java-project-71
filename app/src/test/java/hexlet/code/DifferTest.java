@@ -108,7 +108,7 @@ public class DifferTest {
         assertEquals(output.toString(StandardCharsets.UTF_8).trim(), expectedStylish);
     }
     @AfterEach
-    public void tearDown() {
+    final void tearDown() {
         System.setOut(standardOut);
     }
 }
