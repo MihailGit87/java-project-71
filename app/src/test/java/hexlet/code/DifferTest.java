@@ -52,7 +52,7 @@ public class DifferTest {
     }
 
     @BeforeEach
-    void setUp() {
+    final void setUp() {
         System.setOut(new PrintStream(output));
     }
 
