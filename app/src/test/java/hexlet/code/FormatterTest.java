@@ -15,7 +15,7 @@ class FormatterTest {
 
     @BeforeEach
     void setUp() {
-        list = List.of(Map.of("status", "added", "field", "key", "newValue", 1));
+        list = List.of(Map.of("status", "added", "field", "key", "value2", 1));
         format = "stylish1";
     }
 

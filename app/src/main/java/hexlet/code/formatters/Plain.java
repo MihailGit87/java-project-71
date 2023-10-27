@@ -25,8 +25,8 @@ public final class Plain implements StyleFormatter {
     public String formatText(List<Map<String, Object>> list) {
         return list.stream()
                 .map(line -> {
-                    Object status = Optional.ofNullable(line.get("status")).orElse("null");
-                    Object field = Optional.ofNullable(line.get("field")).orElse("null");
+                    Object status = line.get("status");
+                    Object field = line.get("field");
 
                     if (status.equals("added")) {
                         return patternAdded.formatted(field, formatValue(line.get("value2")));
