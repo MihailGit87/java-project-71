@@ -63,10 +63,10 @@ public class DifferTest {
         assertEquals(Differ.generate(file1yaml, file2yaml, formatStylish), expectedStylish);
     }
 
-//    @Test
-//    void testGeneratePlain() throws IOException {
-//        assertEquals(expectedPlain, Differ.generate(file1yaml, file2yaml, formatPlain));
-//    }
+    @Test
+    void testGeneratePlain() throws IOException {
+        assertEquals(expectedPlain, Differ.generate(file1yaml, file2yaml, formatPlain));
+    }
 
     @Test
     void testGenerateJson() throws IOException {

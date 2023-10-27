@@ -11,7 +11,7 @@ public final class Plain implements StyleFormatter {
     private final String patternUnchanged = "";
 
     private String formatValue(Object value) {
-        if (value instanceof Integer || value instanceof Boolean) {
+        if (value.equals("null") || value instanceof Integer || value instanceof Boolean) {
             return value.toString();
         } else if (value instanceof String) {
             return "'%s'".formatted(value);
