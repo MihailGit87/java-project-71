@@ -1,13 +1,8 @@
 package hexlet.code;
 
-//import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-//import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-//import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-//import java.io.PrintStream;
-//import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +18,6 @@ public class DifferTest {
         expectedStylish = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedStylish.txt"));
         expectedPlain = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedPlain.txt"));
         expectedJson = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedJson.txt"));
-//        String expectedError = Files.readString(Path.of(PATH_TO_FIXTURES + "appTestExpectedError.txt"));
     }
     private static final String PATH_TO_FIXTURES = "src/test/resources/fixtures/";
     private static final String FILE_1_JSON = PATH_TO_FIXTURES + "file1.json";
@@ -36,14 +30,6 @@ public class DifferTest {
     private static String expectedStylish;
     private static String expectedPlain;
     private static String expectedJson;
-//    private static String wrongPath = PATH_TO_FIXTURES + "sqwezsxf/qweasf.json";
-//    @BeforeEach
-//    final void setUp() {
-//        System.setOut(new PrintStream(output));
-//    }
-//    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
-//    private final PrintStream standardOut = System.out;
-
 
     @Test
     void testGenerateStylish() throws IOException {
@@ -79,25 +65,4 @@ public class DifferTest {
     void testGenerateWithDifferentExtension() throws IOException {
         assertEquals(Differ.generate(FILE_1_JSON, FILE_2_YAML, formatStylish), expectedStylish);
     }
-
-//    @Test
-//    void testDiffer() {
-//        Differ dif = new Differ();
-//        assertEquals(Differ.class, dif.getClass());
-//    }
-//
-//    @Test
-//    void mainWithWrongJsonFile1() {
-//        App.main(wrongPath, file2json);
-//        assertEquals(expectedError.formatted(wrongPath), output.toString(StandardCharsets.UTF_8).trim());
-//    }
-//    @Test
-//    void mainJson() {
-//        App.main(file1json, file2json);
-//        assertEquals(output.toString(StandardCharsets.UTF_8).trim(), expectedStylish);
-//    }
-//    @AfterEach
-//    final void tearDown() {
-//        System.setOut(standardOut);
-//    }
 }

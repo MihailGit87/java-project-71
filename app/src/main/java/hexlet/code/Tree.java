@@ -3,6 +3,7 @@ package hexlet.code;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -16,7 +17,7 @@ public class Tree {
                     Object value2 = Optional.ofNullable(secondData.get(key)).orElse("null");
 
                     if (firstData.containsKey(key) && secondData.containsKey(key)) {
-                        if (value1.equals(value2)) {
+                        if (Objects.equals(value1, value2)) {
                             return Map.of("field", key, "status", "unchanged", "value", value1);
                         } else {
                             return Map.of("field", key, "status", "changed", "value1", value1,
