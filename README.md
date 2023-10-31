@@ -40,3 +40,52 @@ Property 'group2' was removed
 }
 ```
 
+### Setup
+```bash
+make setup
+```
+
+### Clean
+```bash
+make clean
+```
+
+### Build
+```bash
+make build
+```
+
+### Install
+```bash
+make install
+```
+
+### Run-dist
+```
+make run-dist
+```
+
+### Run
+```bash
+make run
+```
+
+### Test
+```bash
+make test
+```
+
+### Report
+```bash
+make report
+```
+
+### Lint
+```bash
+make lint
+```
+
+### Check-deps
+```bash
+make check-deps
+```
