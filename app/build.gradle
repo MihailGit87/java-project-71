@@ -1,0 +1,53 @@
+plugins {
+  id 'application'
+  id 'checkstyle'
+  id 'jacoco'
+  id "io.freefair.lombok" version "8.3"
+  id "com.github.ben-manes.versions" version "0.48.0"
+  id "se.patrikerdes.use-latest-versions" version "0.2.18"
+  id 'com.adarshr.test-logger' version '3.2.0'
+}
+
+application {
+  mainClass.set("hexlet.code.App")
+}
+
+checkstyle {
+  toolVersion '8.41'
+}
+
+group = 'hexlet.code'
+version = '1.0-SNAPSHOT'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testImplementation platform('org.junit:junit-bom:5.9.1')
+  testImplementation 'org.junit.jupiter:junit-jupiter'
+  implementation 'info.picocli:picocli:4.7.5'
+  implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+  implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.2'
+  testImplementation 'org.assertj:assertj-core:3.24.2'
+  implementation 'commons-io:commons-io:2.7'
+}
+
+testlogger {
+  showStandardStreams true
+}
+
+test {
+  useJUnitPlatform()
+  finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+  reports {
+    xml.required = true
+  }
+}
+
+compileJava {
+  options.release = 20
+}
