@@ -33,7 +33,7 @@ public class DifferTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"json", "yml"})
-    public void generateTest(String format) throws Exception {
+    public final void generateTest(String format) throws Exception {
         String filePath1 = getPath("file1." + format);
         String filePath2 = getPath("file2." + format);
         String expectedPlain = Files.readString(Path.of(getPath("expectedPlain.txt")));
