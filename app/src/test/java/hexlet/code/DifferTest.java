@@ -4,8 +4,9 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static hexlet.code.Differ.generate;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 public class DifferTest {
 
@@ -33,23 +34,26 @@ public class DifferTest {
     private final  String file2Yaml = getPath("file2.yaml");
 
     @Test
-    void testGenerateStylish() throws IOException {
-        assertEquals(expectedStylish, Differ.generate(file1Json, file2Json));
-        assertEquals(expectedStylish, Differ.generate(file1Yaml, file2Yaml, "stylish"));
+    public void testWrongPath() {
+        var thrown = catchThrowable(
+                () -> generate("newfile1.json", "newfile2.json")
+        );
+        assertThat(thrown).isInstanceOf(Exception.class);
     }
 
     @Test
-    void testGeneratePlain() throws IOException {
-        assertEquals(expectedPlain, Differ.generate(file1Yaml, file2Yaml, "plain"));
+    public void testJson() throws Exception {
+        assertThat(generate(file1Json, file2Json)).isEqualTo(expectedStylish);
+        assertThat(generate(file1Json, file2Json, "stylish")).isEqualTo(expectedStylish);
+        assertThat(generate(file1Json, file2Json, "plain")).isEqualTo(expectedPlain);
+        assertThat(generate(file1Json, file2Json, "json")).isEqualTo(expectedJson);
     }
 
     @Test
-    void testGenerateJson() throws IOException {
-        assertEquals(expectedJson, Differ.generate(file1Yaml, file2Yaml, "json"));
-    }
-
-    @Test
-    void testGenerateWithDifferentExtension() throws IOException {
-        assertEquals(expectedStylish, Differ.generate(file1Json, file2Yaml, "stylish"));
+    public void testYML() throws Exception {
+        assertThat(generate(file1Yaml, file2Yaml)).isEqualTo(expectedStylish);
+        assertThat(generate(file1Yaml, file2Yaml, "stylish")).isEqualTo(expectedStylish);
+        assertThat(generate(file1Yaml, file2Yaml, "plain")).isEqualTo(expectedPlain);
+        assertThat(generate(file1Yaml, file2Yaml, "json")).isEqualTo(expectedJson);
     }
 }

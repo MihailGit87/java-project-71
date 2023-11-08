@@ -18,23 +18,26 @@ public class Tree {
         for (Object key: keys) {
             Map<String, Object> diff = new LinkedHashMap<>();
 
+            var value1 = firstData.get(key);
+            var value2 = secondData.get(key);
+
             if (!firstData.containsKey(key)) {
                 diff.put("status", "added");
                 diff.put("field", key);
-                diff.put("value2", secondData.get(key));
+                diff.put("value2", value2);
             } else if (!secondData.containsKey(key)) {
                 diff.put("status", "removed");
                 diff.put("field", key);
-                diff.put("value1", firstData.get(key));
-            } else if (Objects.equals(firstData.get(key), secondData.get(key))) {
+                diff.put("value1", value1);
+            } else if (Objects.equals(value1, value2)) {
                 diff.put("status", "unchanged");
                 diff.put("field", key);
-                diff.put("value", firstData.get(key));
+                diff.put("value", value1);
             } else {
                 diff.put("status", "changed");
                 diff.put("field", key);
-                diff.put("value2", secondData.get(key));
-                diff.put("value1", firstData.get(key));
+                diff.put("value2", value2);
+                diff.put("value1", value1);
             }
             result.add(diff);
         }
