@@ -20,10 +20,6 @@ public class App implements Callable<Integer> {
             description = "Output format [default: stylish]")
     private String format;
 
-    /**
-     * Метод вызывает метод сравнения файлов generate в классе Differ.
-     * Параметры передается в командной строке при вызове приложения
-     */
     @Override
     public Integer call() {
         String result;

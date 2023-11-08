@@ -1,2 +1,0 @@
-Oops, something went wrong. Try again with different params.
-Problem in: %s

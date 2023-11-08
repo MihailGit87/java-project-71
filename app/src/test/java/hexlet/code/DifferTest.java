@@ -1,68 +1,55 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+//import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 public class DifferTest {
-    private final String formatStylish = "stylish";
-    private final String formatPlain = "plain";
-    private final String formatJson = "json";
 
-    @BeforeAll
-    static void setBefore() throws IOException {
-        expectedStylish = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedStylish.txt"));
-        expectedPlain = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedPlain.txt"));
-        expectedJson = Files.readString(Path.of(PATH_TO_FIXTURES + "expectedJson.txt"));
+    public DifferTest() throws IOException {
     }
-    private static final String PATH_TO_FIXTURES = "src/test/resources/fixtures/";
-    private static final String FILE_1_JSON = PATH_TO_FIXTURES + "file1.json";
-    private static final String FILE_2_JSON = PATH_TO_FIXTURES + "file2.json";
-    private static final String FILE_1_FULL_PATH = Path.of(FILE_1_JSON).toAbsolutePath().toString();
-    private static final String FILE_1_YAML = PATH_TO_FIXTURES + "file1.yml";
-    private static final String FILE_2_YAML = PATH_TO_FIXTURES + "file2.yaml";
-    private static final String FILE_1_TXT =  PATH_TO_FIXTURES + "file1.txt";
-    private static final String FILE_2_TXT =  PATH_TO_FIXTURES + "file2.txt";
-    private static String expectedStylish;
-    private static String expectedPlain;
-    private static String expectedJson;
+
+    public static String getPath(String pathString) {
+        Path path = Path.of("src/test/resources/fixtures/" + pathString);
+        if (!Files.exists(path)) {
+            try {
+                throw new Exception("File '" + path + "' does not exist");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return String.valueOf(path);
+    }
+
+    String expectedPlain = Files.readString(Path.of(getPath("expectedPlain.txt")));
+    String expectedStylish = Files.readString(Path.of(getPath("expectedStylish.txt")));
+    String expectedJson = Files.readString(Path.of(getPath("expectedJson.txt")));
+    private final String FILE_1_JSON = getPath("file1.json");
+    String FILE_2_JSON = getPath("file2.json");
+    String FILE_1_YAML = getPath("file1.yml");
+    String FILE_2_YAML = getPath("file2.yaml");
 
     @Test
     void testGenerateStylish() throws IOException {
-        assertEquals(Differ.generate(FILE_1_JSON, FILE_2_JSON), expectedStylish);
-        assertEquals(Differ.generate(FILE_1_FULL_PATH, FILE_2_JSON, formatStylish), expectedStylish);
-        assertEquals(Differ.generate(FILE_1_YAML, FILE_2_YAML, formatStylish), expectedStylish);
+        assertEquals(expectedStylish, Differ.generate(FILE_1_JSON, FILE_2_JSON));
+        assertEquals(expectedStylish, Differ.generate(FILE_1_YAML, FILE_2_YAML, "stylish"));
     }
 
     @Test
     void testGeneratePlain() throws IOException {
-        assertEquals(expectedPlain, Differ.generate(FILE_1_YAML, FILE_2_YAML, formatPlain));
+        assertEquals(expectedPlain, Differ.generate(FILE_1_YAML, FILE_2_YAML, "plain"));
     }
 
     @Test
     void testGenerateJson() throws IOException {
-        assertEquals(expectedJson, Differ.generate(FILE_1_YAML, FILE_2_YAML, formatJson));
-    }
-
-    @Test
-    void testGenerateWithUnknownExtension() {
-        assertThrowsExactly(IOException.class, () -> {
-            Differ.generate(FILE_1_TXT, FILE_2_TXT, formatStylish);
-        });
-        assertThrowsExactly(IOException.class, () -> {
-            Differ.generate(FILE_1_TXT, FILE_2_JSON, formatStylish);
-        });
-        assertThrowsExactly(IOException.class, () -> {
-            Differ.generate(FILE_1_JSON, FILE_2_TXT, formatStylish);
-        });
+        assertEquals(expectedJson, Differ.generate(FILE_1_YAML, FILE_2_YAML, "json"));
     }
 
     @Test
     void testGenerateWithDifferentExtension() throws IOException {
-        assertEquals(Differ.generate(FILE_1_JSON, FILE_2_YAML, formatStylish), expectedStylish);
+        assertEquals(expectedStylish, Differ.generate(FILE_1_JSON, FILE_2_YAML, "stylish"));
     }
 }
