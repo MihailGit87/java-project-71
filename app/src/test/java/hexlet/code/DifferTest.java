@@ -1,7 +1,8 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import static hexlet.code.Differ.generate;
@@ -9,9 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 public class DifferTest {
-    private static String expectedStylish;
-    private static String expectedPlain;
-    private static String expectedJson;
 
     public static String getPath(String pathString) {
         Path path = Path.of("src/test/resources/fixtures/" + pathString);
@@ -24,16 +22,6 @@ public class DifferTest {
         }
         return String.valueOf(path);
     }
-    @BeforeAll
-    public static void beforeAll() throws Exception {
-        expectedPlain = Files.readString(Path.of(getPath("expectedPlain.txt")));
-        expectedStylish = Files.readString(Path.of(getPath("expectedStylish.txt")));
-        expectedJson = Files.readString(Path.of(getPath("expectedJson.txt")));
-    }
-    private final String file1Json = getPath("file1.json");
-    private final String file2Json = getPath("file2.json");
-    private final String file1Yaml = getPath("file1.yml");
-    private final String file2Yaml = getPath("file2.yaml");
 
     @Test
     public void testWrongPath() {
@@ -43,19 +31,18 @@ public class DifferTest {
         assertThat(thrown).isInstanceOf(Exception.class);
     }
 
-    @Test
-    public void testJson() throws Exception {
-        assertThat(generate(file1Json, file2Json)).isEqualTo(expectedStylish);
-        assertThat(generate(file1Json, file2Json, "stylish")).isEqualTo(expectedStylish);
-        assertThat(generate(file1Json, file2Json, "plain")).isEqualTo(expectedPlain);
-        assertThat(generate(file1Json, file2Json, "json")).isEqualTo(expectedJson);
-    }
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    public void generateTest(String format) throws Exception {
+        String filePath1 = getPath("file1." + format);
+        String filePath2 = getPath("file2." + format);
+        String expectedPlain = Files.readString(Path.of(getPath("expectedPlain.txt")));
+        String expectedStylish = Files.readString(Path.of(getPath("expectedStylish.txt")));
+        String expectedJson = Files.readString(Path.of(getPath("expectedJson.txt")));
 
-    @Test
-    public void testYML() throws Exception {
-        assertThat(generate(file1Yaml, file2Yaml)).isEqualTo(expectedStylish);
-        assertThat(generate(file1Yaml, file2Yaml, "stylish")).isEqualTo(expectedStylish);
-        assertThat(generate(file1Yaml, file2Yaml, "plain")).isEqualTo(expectedPlain);
-        assertThat(generate(file1Yaml, file2Yaml, "json")).isEqualTo(expectedJson);
+        assertThat(generate(filePath1, filePath2)).isEqualTo(expectedStylish);
+        assertThat(generate(filePath1, filePath2, "stylish")).isEqualTo(expectedStylish);
+        assertThat(generate(filePath1, filePath2, "plain")).isEqualTo(expectedPlain);
+        assertThat(generate(filePath1, filePath2, "json")).isEqualTo(expectedJson);
     }
 }
