@@ -1,7 +1,7 @@
 package hexlet.code;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import static hexlet.code.Differ.generate;
@@ -9,9 +9,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 public class DifferTest {
-
-    public DifferTest() throws IOException {
-    }
+    private static String expectedStylish;
+    private static String expectedPlain;
+    private static String expectedJson;
 
     public static String getPath(String pathString) {
         Path path = Path.of("src/test/resources/fixtures/" + pathString);
@@ -24,14 +24,16 @@ public class DifferTest {
         }
         return String.valueOf(path);
     }
-
-    private final String expectedPlain = Files.readString(Path.of(getPath("expectedPlain.txt")));
-    private final String expectedStylish = Files.readString(Path.of(getPath("expectedStylish.txt")));
-    private final String expectedJson = Files.readString(Path.of(getPath("expectedJson.txt")));
+    @BeforeAll
+    public static void beforeAll() throws Exception {
+        expectedPlain = Files.readString(Path.of(getPath("expectedPlain.txt")));
+        expectedStylish = Files.readString(Path.of(getPath("expectedStylish.txt")));
+        expectedJson = Files.readString(Path.of(getPath("expectedJson.txt")));
+    }
     private final String file1Json = getPath("file1.json");
     private final String file2Json = getPath("file2.json");
-    private final  String file1Yaml = getPath("file1.yml");
-    private final  String file2Yaml = getPath("file2.yaml");
+    private final String file1Yaml = getPath("file1.yml");
+    private final String file2Yaml = getPath("file2.yaml");
 
     @Test
     public void testWrongPath() {
