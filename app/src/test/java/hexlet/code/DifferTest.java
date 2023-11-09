@@ -5,22 +5,16 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import static hexlet.code.Differ.generate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 public class DifferTest {
 
-    public static String getPath(String pathString) {
-        Path path = Path.of("src/test/resources/fixtures/" + pathString);
-        if (!Files.exists(path)) {
-            try {
-                throw new Exception("File '" + path + "' does not exist");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return String.valueOf(path);
+    private static String getPath(String fileName) {
+        return String.valueOf(Paths.get("src/test/resources/fixtures", fileName).toAbsolutePath().normalize());
     }
 
     @Test
